@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 09:45:48 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:12:31 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ void        hook_rotate(void *param);//ft_hook_rotate
 void        hook_project(void *param);//ft_hook_project
 
 /* fdf_utils.c*/
-void        ft_upper(unsigned int i, char *c);//make_upper
+void        to_upper(unsigned int i, char *c);//make_upper
 void        image_reset(mlx_image_t *image);//draw_reset
 int         fname_valid(const char *filename);//valid_filename
 
 /* fdf_color.c */
-int         get_clr(t_pixel current, t_pixel a, t_pixel b);//get_color
+int         get_clr(t_pixel current, t_pixel start, t_pixel end);//get_color
 void        apply_zclr(t_map *map);//set_zcolor
 
 #endif
