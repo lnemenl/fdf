@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:00:26 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/14 13:58:49 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:19:29 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	map_init(t_map *map)
 	map-> height_scale = 1;
 	map->use_height_color = false;
 	map->max_height = INT_MIN;
-	map->min_height = INR_MAX;
+	map->min_height = INT_MAX;
 	map->rows = 0;
 	map->cols = 0;
 	map->projected_points = NULL;
@@ -79,7 +79,7 @@ static t_map	*input_parse(char *filename)
 	map_size(fd, map);
 	close(fd);
 	table_memalloc(map);
-	map->interval = ft_min(WIDTH / map->cols, HEIGHT / maps->rows) / 2
+	map->interval = ft_min(WIDTH / map->cols, HEIGHT / map->rows) / 2;
 	map->interval = ft_max(2, map->interval);
 	fd = open(filename, O_RDONLY, 0777);
 	map_parse(fd, map);

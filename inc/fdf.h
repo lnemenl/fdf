@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 11:42:41 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:20:29 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <string.h>
+# include <limits.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/Libft/libft.h"
 
@@ -121,9 +122,12 @@ void	hook_project(void *param);
 void	to_upper(unsigned int i, char *c);
 void	image_reset(mlx_image_t *image);
 int		fname_valid(const char *filename);
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 
 /* fdf_color.c */
 int		get_clr(t_pixel current, t_pixel start, t_pixel end);
 void	apply_zclr(t_map *map);
+
 
 #endif

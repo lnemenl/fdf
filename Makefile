@@ -6,7 +6,7 @@
 #    By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/14 09:35:13 by rkhakimu          #+#    #+#              #
-#    Updated: 2024/08/15 12:44:54 by rkhakimu         ###   ########.fr        #
+#    Updated: 2024/08/15 13:19:06 by rkhakimu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,14 @@ endif
 SRC_DIR	:= src
 SRC		:= fdf_main.c \
 			fdf_draw.c \
-			fdf_read.c \
-			fdf_utils.c \
+			fdf_error.c \
 			fdf_hooks.c \
-			fdf_color.c \
-			fdf_projection.c \
-			fdf_error.c
+			fdf_menu.c \
+			fdf_minmax.c \
+			fdf_parse.c \
+			fdf_rotate.c \
+			fdf_utils.c \
+			fdf_color.c
 			
 SRCS	:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ_DIR	:= obj
