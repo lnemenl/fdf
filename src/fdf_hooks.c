@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 09:43:24 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:28:48 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:43:12 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	hook_events(void *param)
 	fdf = (t_fdf *)param;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_R))
 		refresh_map(fdf->map);
-	if (mlx_is_key_wond(fdf->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fdf->mlx);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_LEFT))
 		fdf->map->center_x -= 7;
