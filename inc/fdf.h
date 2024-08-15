@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:28:36 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:50:09 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void	image_reset(mlx_image_t *image);
 int		fname_valid(const char *filename);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
+int		ft_atoi_base(const char *str, const char *base);
+
 
 /* fdf_color.c */
 int		get_clr(t_pixel current, t_pixel start, t_pixel end);
