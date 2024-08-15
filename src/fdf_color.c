@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:27:45 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:14:07 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:27:16 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int 	get_clr(t_pixel current, t_pixel start, t_pixel end)
 	r = radiant((start.rgba >> 24) & 0xFF, (end.rgba >> 24) & 0xFF, prcntg);
 	g = radiant((start.rgba >> 16) & 0xFF, (end.rgba >> 16) & 0xFF, prcntg);
 	b = radiant((start.rgba >> 8) & 0xFF, (end.rgba >> 8) & 0xFF, prcntg);
-	return (red << 24) | (green << 16) | blue << 8 | 0xFF);
+	return ((r << 24) | (g << 16) | b << 8 | 0xFF);
 }
 
 static int	zclr(double prcnt)

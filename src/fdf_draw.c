@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:23:45 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 08:40:54 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:26:28 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void 	bresenham(mlx_image_t *image, t_pixel p1, t_pixel p2)
 	error[0] = abs(p2.x - p1.x) - abs(p2.y - p1.y);
 	while (crrnt.x != p2.x || crrnt.y != p2.y)
 	{
-		if ((unit32_t)crrnt.x < image->width
-			&& (unit32_t)crrnt.y < image->height)
+		if ((uint32_t)crrnt.x < image->width
+			&& (uint32_t)crrnt.y < image->height)
 			mlx_put_pixel(image, crrnt.x, crrnt.y, get_clr(crrnt, p1, p2));
 		error[1] = error[0] * 2;
 		if (error[1] > -abs(p2.y - p1.y))
@@ -44,7 +44,7 @@ static void 	bresenham(mlx_image_t *image, t_pixel p1, t_pixel p2)
 void	map_project(t_map *map, int i, int j)
 {
 	t_vertex	*previous;
-	t_vertex	*temp;
+	t_vertex	temp;
 	t_pixel		*new;
 	
 	previous = &(map->original_points[i][j]);
@@ -54,7 +54,7 @@ void	map_project(t_map *map, int i, int j)
 	temp.z = previous->z * map->height_scale;
 	rotation_z(&temp.x, &temp.y, map->rotation_z);
 	rotation_x(&temp.y, &temp.z, map->rotation_x);
-	rotation_y(&temp.x, &temp.z, mapt->rotation_y);
+	rotation_y(&temp.x, &temp.z, map->rotation_y);
 	new->x = (int)((temp.x * map->zoom - temp.y * map->zoom)
 		* cos(map->iso_angle_x) + map->center_x);
 	new->y = (int)(-temp.z * map->zoom

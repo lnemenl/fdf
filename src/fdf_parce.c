@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:38:16 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 09:19:17 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:31:19 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	clr_parse(int fd, t_map *map, char *arr2)
 {
 	while (*arr2 == '-')
 		arr2++;
-	while (ft_isdigit(*arr))
+	while (ft_isdigit(*arr2))
 		arr2++;
 	if (*arr2 == ',')
 		arr2++;
@@ -24,9 +24,9 @@ static int	clr_parse(int fd, t_map *map, char *arr2)
 		return (0xFFFFFFFF);
 	if ((ft_strncmp(arr2, "0X", 2) && ft_strncmp(arr2, "0x", 2)))
 		map_error(fd, map, MAP_ERR);
-	arr += 2;
-	ft_striteri(arr, &to_upper);
-	return ((ft_atoi_base(arr, "0123456789ABCDEF") << 8) | 0xFF);		
+	arr2 += 2;
+	ft_striteri(arr2, &to_upper);
+	return ((ft_atoi_base(arr2, "0123456789ABCDEF") << 8) | 0xFF);		
 }
 
 static void column_parse(int fd, t_map *map, char **arr, int i)
@@ -92,7 +92,7 @@ static int	get_columns(int fd, t_map *map, char *line)
 	arr = ft_split(temp, ' ');
 	free(temp);
 	if(!arr)
-		map_error(fd, map, MALLOC_ERR)
+		map_error(fd, map, MALLOC_ERR);
 	i = 0;
 	while (arr[i])
 	{
