@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 09:43:24 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 10:26:11 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:28:48 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	refresh_map(t_map *map)
 	map->center_x = WIDTH / 2;
 	map->center_y = HEIGHT / 2;
 	map->zoom = 1;
-	map->height_scale = 1;
-	map-use_height_color = false;
+	map->hight_scale = 1;
+	map->use_height_color = false;
 }
 void	hook_events(void *param)
 {

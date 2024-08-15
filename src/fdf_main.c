@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:00:26 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:19:29 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:28:55 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	map_init(t_map *map)
 	map->center_x = WIDTH / 2;
 	map->center_y = HEIGHT / 2;
 	map->zoom = 1;
-	map-> height_scale = 1;
+	map-> hight_scale = 1;
 	map->use_height_color = false;
 	map->max_height = INT_MIN;
 	map->min_height = INT_MAX;
