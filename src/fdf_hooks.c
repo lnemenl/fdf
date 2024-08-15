@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 09:43:24 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:43:12 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/15 14:12:18 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	hook_events(void *param)
 		fdf->map->center_x += 7;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_UP))
 		fdf->map->center_y -= 7;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_DOWN))
 		fdf->map->center_y += 7;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_EQUAL))
 		hook_scroll(0, 1, param);
@@ -90,4 +90,6 @@ void	hook_rotate(void *param)
 		fdf->map->iso_angle_x += sign * 0.02;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
 		fdf->map->iso_angle_y += sign * 0.02;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Z))
+		fdf->map->rotation_z += sign * 0.02;
 }
