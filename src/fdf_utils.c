@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 08:41:19 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 09:27:02 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:05:02 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,26 @@ void	image_reset(mlx_image_t *image)
 		}
 		i++;
 	}
+}
+int ft_atoi_base(const char *str, const char *base)
+{
+	int		neg;
+	int		res;
+	int		nbase;
+
+	while (*str == ' ' || *str == '\t' || *str == '\n'
+			|| *str == '\v' || *str == '\f' || *str == '\r')
+		str++;
+	neg = 1;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			neg = -1;
+	nbase = ft_strlen(base);
+	res = 0;
+	while (str && *str && ft_strchr(base, *str))
+	{
+		res = res * nbase + (ft_strchr(base, *str) - base);
+		str++;
+	}
+	return (res * neg);
 }
