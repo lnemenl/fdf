@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 09:43:24 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 10:09:15 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:26:11 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	hook_events(void *param)
 	t_fdf	*fdf;
 
 	fdf = (t_fdf *)param;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_0))
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_R))
 		refresh_map(fdf->map);
 	if (mlx_is_key_wond(fdf->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fdf->mlx);
@@ -59,3 +59,35 @@ void	hook_events(void *param)
 		hook_scroll(0, -1, param);
 }
 
+void	hook_project(void *param)
+{
+	t_fdf	*fdf;
+	
+	fdf = (t_fdf *)param;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
+		fdf->map->use_height_color = !(fdf->map->use_height_color);
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_I))
+	{
+		fdf->map->iso_angle_x = 0.46373398 / 2;
+		fdf->map->iso_angle_y = 0.46373398;
+	}
+}
+
+void	hook_rotate(void *param)
+{
+	t_fdf	*fdf;
+	double	sign;
+	
+	fdf = (t_fdf *)param;
+	sign = 0;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_COMMA))
+		sign = -1;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_PERIOD))
+		sign = 1;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
+		fdf->map->hight_scale += sign * 0.02;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
+		fdf->map->iso_angle_x += sign * 0.02;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
+		fdf->map->iso_angle_y += sign * 0.02;
+}
