@@ -6,7 +6,7 @@
 #    By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/14 09:35:13 by rkhakimu          #+#    #+#              #
-#    Updated: 2024/08/15 13:46:35 by rkhakimu         ###   ########.fr        #
+#    Updated: 2024/08/15 14:14:53 by rkhakimu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ clean:
 fclean: clean
 	rm $(NAME)
 	rmdir $(OBJ_DIR)
-	rm -rf $(LIBFT_DIR)
 	rm -rf $(MLX_DIR)
 
 re: fclean all
