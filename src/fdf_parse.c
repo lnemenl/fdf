@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:47:54 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:52:01 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:39:19 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void column_parse(int fd, t_map *map, char **arr, int i)
 		center_y = (map->rows - 1) * map->interval / 2;
 		point->x = (double)j * (map->interval) - center_x;
 		point->y = (double)i * (map->interval) - center_y;
-		point->z = (double)ft_atoi(arr[i]) * (map->interval);
+		point->z = (double)ft_atoi(arr[j]) * (map->interval);//changed from i to j, mindblowing
 		map->max_height = ft_max(map->max_height, point->z);
 		map->min_height = ft_min(map->min_height, point->z);
 		point->mapcolor = clr_parse(fd, map, arr[j]);

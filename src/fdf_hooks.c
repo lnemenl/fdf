@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 18:14:38 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:43:40 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,35 @@ void	hook_events(void *param)
 		hook_scroll(0, -1, param);
 }
 
-void	hook_project(void *param)
+
+void hook_project(void *param)
 {
-	t_fdf	*fdf;
-	
-	fdf = (t_fdf *)param;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
-		fdf->map->use_height_color = !(fdf->map->use_height_color);
+    t_fdf *fdf;
+    static int key_pressed = 0;
+
+    fdf = (t_fdf *)param;
+    if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
+    {
+        if (!key_pressed)
+        {
+            fdf->map->use_height_color = !(fdf->map->use_height_color);
+            key_pressed = 1;
+        }
+    }
+    else
+    {
+        key_pressed = 0;
+    }
 }
+
+// void	hook_project(void *param)
+// {
+// 	t_fdf	*fdf;
+	
+// 	fdf = (t_fdf *)param;
+// 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
+// 		fdf->map->use_height_color = !(fdf->map->use_height_color);
+// }
 
 void	hook_rotate(void *param)
 {
