@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:38:16 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/14 14:42:34 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:19:17 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	clr_parse(int fd, t_map *map, char *arr2)
 	if ((ft_strncmp(arr2, "0X", 2) && ft_strncmp(arr2, "0x", 2)))
 		map_error(fd, map, MAP_ERR);
 	arr += 2;
-	ft_striteri(arr, &ft_toupper);
+	ft_striteri(arr, &to_upper);
 	return ((ft_atoi_base(arr, "0123456789ABCDEF") << 8) | 0xFF);		
 }
 

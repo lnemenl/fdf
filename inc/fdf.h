@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/14 13:58:04 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 09:45:48 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH              1920
 # define HEIGHT             1080
 # define TEXT_CLR         0xEAEAEAFF //TEXT_COLOR
-# define BG_CLR         0x22222200 //BACKGROUND
+# define BACKGROUND         0x22222200 //BACKGROUND
 # define MENU_BG_CLR    0x1E1E1EFF //MENU_BACKGROUND
 # define CLR_LV_10          0x9e0142ff //COLOR_TEN
 # define CLR_LV_9        0xd53e4fff // COLOR_NINE
@@ -106,13 +106,13 @@ void        draw_image(void *param);//draw_image
 void        menu(mlx_t *mlx);//display_menu
 
 /* fdf_rotate.c */
-void        rot_x_axis(double *y, double *z, double alpha);//rotate_x
-void        rot_y_axis(double *x, double *z, double beta);//rotate_y
-void        rot_z_axis(double *x, double *y, double gamma);//rotate_z
+// void        rot_x_axis(double *y, double *z, double alpha);//rotate_x
+// void        rot_y_axis(double *x, double *z, double beta);//rotate_y
+void        rot_z_axis(double *x, double *y, double angle);//rotate_z
 
 /* fdf_hooks.c */
 void        hook_events(void *param);//ft_hook
-void        hook_scroll(double xdelta, double ydelta, void *param);//fdf_scrollhook
+void        hook_scroll(double xscale, double yscale, void *param);//fdf_scrollhook
 void        hook_rotate(void *param);//ft_hook_rotate
 void        hook_project(void *param);//ft_hook_project
 
