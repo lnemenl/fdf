@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 07:23:45 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:26:28 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:40:58 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	map_project(t_map *map, int i, int j)
 	new = &(map->projected_points[i][j]);
 	temp.x = previous->x;
 	temp.y = previous->y;
-	temp.z = previous->z * map->height_scale;
-	rotation_z(&temp.x, &temp.y, map->rotation_z);
-	rotation_x(&temp.y, &temp.z, map->rotation_x);
-	rotation_y(&temp.x, &temp.z, map->rotation_y);
+	temp.z = previous->z * map->hight_scale;
+	rot_z_axis(&temp.x, &temp.y, map->rotation_z);
+	// rotation_x(&temp.y, &temp.z, map->rotation_x);
+	// rotation_y(&temp.x, &temp.z, map->rotation_y);
 	new->x = (int)((temp.x * map->zoom - temp.y * map->zoom)
 		* cos(map->iso_angle_x) + map->center_x);
 	new->y = (int)(-temp.z * map->zoom
