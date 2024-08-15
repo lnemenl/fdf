@@ -6,7 +6,7 @@
 #    By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/14 09:35:13 by rkhakimu          #+#    #+#              #
-#    Updated: 2024/08/14 09:36:30 by rkhakimu         ###   ########.fr        #
+#    Updated: 2024/08/15 12:44:54 by rkhakimu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,15 @@ ifeq ($(UNAME_S),Darwin)
 	-Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/" -pthread -lm
 endif
 SRC_DIR	:= src
-SRC		:= $(wildcard *.c)
+SRC		:= fdf_main.c \
+			fdf_draw.c \
+			fdf_read.c \
+			fdf_utils.c \
+			fdf_hooks.c \
+			fdf_color.c \
+			fdf_projection.c \
+			fdf_error.c
+			
 SRCS	:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ_DIR	:= obj
 OBJ		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
