@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 17:33:43 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:11:51 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct	s_map
 	double		rotation_y;
 	double		rotation_z;
 	double		zoom;
-	double		hight_scale;
+	double		height_scale;
 	t_vertex	**original_points;
 	t_pixel		**projected_points;
 }				t_map;

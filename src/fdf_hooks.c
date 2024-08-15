@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 18:43:40 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:09:07 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	refresh_map(t_map *map)
 	map->center_x = WIDTH / 2;
 	map->center_y = HEIGHT / 2;
 	map->zoom = 1;
-	map->hight_scale = 1;
+	map->height_scale = 1;
 	map->use_height_color = false;
 }
 void	hook_events(void *param)
@@ -81,15 +81,6 @@ void hook_project(void *param)
     }
 }
 
-// void	hook_project(void *param)
-// {
-// 	t_fdf	*fdf;
-	
-// 	fdf = (t_fdf *)param;
-// 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
-// 		fdf->map->use_height_color = !(fdf->map->use_height_color);
-// }
-
 void	hook_rotate(void *param)
 {
 	t_fdf	*fdf;
@@ -102,7 +93,7 @@ void	hook_rotate(void *param)
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_PERIOD))
 		sign = 1;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
-		fdf->map->hight_scale += sign * 0.02;
+		fdf->map->height_scale += sign * 0.02;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
 		fdf->map->iso_angle_x += sign * 0.02;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
