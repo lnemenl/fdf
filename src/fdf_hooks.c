@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 14:12:18 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:14:38 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	hook_scroll(double xscale, double yscale, void *param)
 {
 	t_fdf	*fdf;
 	
+	(void)xscale;//added this one as it was complaining on macOS
 	fdf = (t_fdf *)param;
 	if (yscale > 0)
 		fdf->map->zoom *= 1.02;
@@ -66,11 +67,6 @@ void	hook_project(void *param)
 	fdf = (t_fdf *)param;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
 		fdf->map->use_height_color = !(fdf->map->use_height_color);
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_I))
-	{
-		fdf->map->iso_angle_x = 0.46373398 / 2;
-		fdf->map->iso_angle_y = 0.46373398;
-	}
 }
 
 void	hook_rotate(void *param)

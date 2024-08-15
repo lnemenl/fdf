@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 08:41:19 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:05:02 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:27:22 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	image_reset(mlx_image_t *image)
 	while (i < image->height)
 	{
 		j = 0;
-		while ( j < image->height)
+		while ( j < image->width)
 		{
 			mlx_put_pixel(image, j, i, BACKGROUND);
 			j++;

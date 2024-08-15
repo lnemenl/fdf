@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:50:09 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:33:43 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,10 @@ void	draw_image(void *param);
 void	menu(mlx_t *mlx);
 
 /* fdf_rotate.c */
-// void        rot_x_axis(double *y, double *z, double alpha);//rotate_x
-// void        rot_y_axis(double *x, double *z, double beta);//rotate_y
 void	rot_z_axis(double *x, double *y, double angle);
 
 /* fdf_hooks.c */
-void	hook_events(void *param);//ft_hook
+void	hook_events(void *param);
 void	hook_scroll(double xscale, double yscale, void *param);
 void	hook_rotate(void *param);
 void	hook_project(void *param);
