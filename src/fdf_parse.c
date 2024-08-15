@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:47:54 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:48:00 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:52:01 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void column_parse(int fd, t_map *map, char **arr, int i)
 	j = -1;
 	while (++j < map->cols)
 	{
-		if(!fd_isdigit(*arr[j]) && *arr[j] != '-')
+		if(!ft_isdigit(*arr[j]) && *arr[j] != '-')
 			map_error(fd, map, MAP_ERR);
 		point = &(map->original_points[i][j]);
 		center_x = (map->cols - 1) * map->interval / 2;
