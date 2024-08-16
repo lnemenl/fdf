@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 20:11:51 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/16 08:24:14 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/Libft/libft.h"
 
-# define WIDTH			1920
-# define HEIGHT			1080
-# define TEXT_CLR		0xf3f6f4
-# define BACKGROUND		0x13333700
+# define WIDTH			5120
+# define HEIGHT			2880
+# define TEXT_CLR		0xf3f6f4FF
+# define BACKGROUND		0x0E2F4400
 # define MENU_BG_CLR	0x1E1E1EFF
-# define CLR_LV_1		0x00FFFFFF
-# define CLR_LV_2		0x099FFFFF
-# define CLR_LV_3		0x0062FFFF
-# define CLR_LV_4		0x0033FFFF
-# define CLR_LV_5		0x9D00FFFF
-# define CLR_LV_6		0xCC00FFFF
-# define CLR_LV_7		0x6E0DD0FF
-# define CLR_LV_8		0x9900FFFF
-# define CLR_LV_9		0xFF00FFFF
-# define CLR_LV_10		0xFF00CCFF
+# define CLR_LV_1		0xFF00CCFF
+# define CLR_LV_2		0xFF00FFFF
+# define CLR_LV_3		0x9900FFFF
+# define CLR_LV_4		0x6E0DD0F
+# define CLR_LV_5		0xCC00FFFF
+# define CLR_LV_6		0x9D00FFFF
+# define CLR_LV_7		0xF0033FFF
+# define CLR_LV_8		0x0062FFFF
+# define CLR_LV_9		0x099FFFFF
+# define CLR_LV_10		0x00FFFFFF
 
 # define USAGE_FORMAT	"Format:\n\t./fdf maps/filename.fdf"
 # define MALLOC_ERR		"Malloc failed"
