@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 20:09:07 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:09:01 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,6 @@ void	hook_rotate(void *param)
 		sign = 1;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
 		fdf->map->height_scale += sign * 0.02;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
-		fdf->map->iso_angle_x += sign * 0.02;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
-		fdf->map->iso_angle_y += sign * 0.02;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Z))
 		fdf->map->rotation_z += sign * 0.02;
 }
