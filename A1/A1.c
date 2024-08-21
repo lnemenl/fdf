@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   A1.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 18:27:05 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:35:35 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,8 +279,6 @@ void	map_project(t_map *map, int i, int j)
 	temp.y = previous->y;
 	temp.z = previous->z * map->hight_scale;
 	rot_z_axis(&temp.x, &temp.y, map->rotation_z);
-	// rotation_x(&temp.y, &temp.z, map->rotation_x);
-	// rotation_y(&temp.x, &temp.z, map->rotation_y);
 	new->x = (int)((temp.x * map->zoom - temp.y * map->zoom)
 		* cos(map->iso_angle_x) + map->center_x);
 	new->y = (int)(-temp.z * map->zoom
@@ -1393,3 +1391,15 @@ char	**ft_split(char const *s, char c)
 	array = split(s, c, array, words);
 	return (array);
 }
+
+
+//typedef void (*mlx_mousefunc)(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+
+/**
+ * Callback function used to handle raw mouse movement.
+ * 
+ * @param[in] xpos The mouse x position.
+ * @param[in] ypos The mouse y position.
+ * @param[in] param Additional parameter to pass on to the function.
+ * */
+

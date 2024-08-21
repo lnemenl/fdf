@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:00:26 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 20:09:58 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:56:36 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_map	*input_parse(char *filename)
 	int		fd;
 	t_map	*map;
 	
-	fd = open(filename, O_RDONLY, 0777);
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		failSafe(FILE_OPEN_ERR);
 	map = malloc(sizeof(t_map));
@@ -79,9 +79,9 @@ static t_map	*input_parse(char *filename)
 	map_size(fd, map);
 	close(fd);
 	table_memalloc(map);
-	map->interval = ft_min(WIDTH / map->cols, HEIGHT / map->rows) / 2;
+	map->interval = ft_min(WIDTH / map->cols, HEIGHT / map->rows) / 4;
 	map->interval = ft_max(2, map->interval);
-	fd = open(filename, O_RDONLY, 0777);
+	fd = open(filename, O_RDONLY);
 	map_parse(fd, map);
 	close(fd);
 	apply_zclr(map);

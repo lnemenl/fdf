@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/16 08:24:14 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:30:45 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/Libft/libft.h"
 
-# define WIDTH			5120
-# define HEIGHT			2880
+# define WIDTH			3840
+# define HEIGHT			2160
 # define TEXT_CLR		0xf3f6f4FF
 # define BACKGROUND		0x0E2F4400
 # define MENU_BG_CLR	0x1E1E1EFF
@@ -98,7 +98,7 @@ void	map_size(int fd, t_map *map);
 
 /* fdf_error.c */
 void	arr_free(void **ptr, size_t len);
-void	map_free(t_map *map);//free_map
+void	map_free(t_map *map);
 void	failSafe(const char *message);
 void	map_error(int fd, t_map *map, char *message);
 
