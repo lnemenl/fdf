@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/21 10:09:01 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:00:50 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,35 @@ void hook_project(void *param)
     {
         key_pressed = 0;
     }
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1)) // Top view
+	{
+		fdf->map->iso_angle_x = 0;
+		fdf->map->iso_angle_y = M_PI / 2;
+		fdf->map->rotation_z = 0;
+		fdf->map->height_scale = 0; // Flatten the view for top-down perspective
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_2)) // Side view
+	{
+		fdf->map->iso_angle_x = 0;
+		fdf->map->iso_angle_y = 0;
+		fdf->map->rotation_z = M_PI / 2; // Rotate 90 degrees around Z-axis
+		fdf->map->height_scale = 1;
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_3)) // Front view
+	{
+		fdf->map->iso_angle_x = 0;
+		fdf->map->iso_angle_y = 0;
+		fdf->map->rotation_z = 0;
+		fdf->map->height_scale = 1;
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_4)) // Isometric view (original)
+	{
+		fdf->map->iso_angle_x = 0.46373398 / 2;
+		fdf->map->iso_angle_y = 0.46373398;
+		fdf->map->rotation_z = 0;
+		fdf->map->height_scale = 1;
+	}
 }
-
 void	hook_rotate(void *param)
 {
 	t_fdf	*fdf;

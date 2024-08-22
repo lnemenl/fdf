@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/19 14:30:45 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:13:20 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,5 @@ int		ft_atoi_base(const char *str, const char *base);
 /* fdf_color.c */
 int		get_clr(t_pixel current, t_pixel start, t_pixel end);
 void	apply_zclr(t_map *map);
-
 
 #endif
