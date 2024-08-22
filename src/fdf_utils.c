@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:55:33 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 20:55:35 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:56:43 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ void	image_reset(mlx_image_t *image)
 		i++;
 	}
 }
+void	refresh_map(t_map *map)
+{
+	map->iso_angle_x = 0.46373398 / 2;
+	map->iso_angle_y = 0.46373398;
+	map->rotation_x = 0;
+	map->rotation_y = 0;
+	map->rotation_z = 0;
+	map->center_x = WIDTH / 2;
+	map->center_y = HEIGHT / 2;
+	map->zoom = 1;
+	map->height_scale = 1;
+	map->use_height_color = false;
+}
+
 int ft_atoi_base(const char *str, const char *base)
 {
 	int		neg;

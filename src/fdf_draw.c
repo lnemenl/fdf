@@ -6,13 +6,13 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:54:19 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 22:22:30 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 23:30:56 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static void 	bresenham(mlx_image_t *image, t_pixel p1, t_pixel p2)
+static void		bresenham(mlx_image_t *image, t_pixel p1, t_pixel p2)
 {
 	int		error[2];
 	t_pixel	crrnt;
@@ -40,43 +40,6 @@ static void 	bresenham(mlx_image_t *image, t_pixel p1, t_pixel p2)
 		}
 	}
 }
-
-static void map_pov(t_map *map, t_pixel *new, double x, double y, double z)
-{
-    if (map->iso_angle_x == 0 && map->iso_angle_y == -M_PI / 2)
-    {
-        new->x = (int)(x * map->zoom + map->center_x);
-        new->y = (int)(y * map->zoom + map->center_y);
-    }
-    else if (map->iso_angle_x == 0 && map->iso_angle_y == 0)
-    {
-        new->x = (int)(x * map->zoom + map->center_x);
-        new->y = (int)(-z * map->zoom + map->center_y);
-    }
-    else if (map->iso_angle_x == M_PI / 2 && map->iso_angle_y == 0)
-    {
-        new->x = (int)(y * map->zoom + map->center_x);
-        new->y = (int)(-z * map->zoom + map->center_y);
-    }
-    else
-    {
-        new->x = (int)((x - y) * cos(map->iso_angle_x) * 
-			map->zoom + map->center_x);
-        new->y = (int)((x + y) * sin(map->iso_angle_y) - z);
-        new->y = (int)(new->y * map->zoom + map->center_y);
-    }
-}
-
-static void set_map_pov(t_map *map, t_vertex *previous,
-    t_pixel *new, double x, double y, double z)
-{
-    map_pov(map, new, x, y, z);
-    if (map->use_height_color)
-        new->rgba = previous->zcolor;
-    else
-        new->rgba = previous->mapcolor;
-}
-
 
 void    map_project(t_map *map, int i, int j)
 {
@@ -137,28 +100,3 @@ void	draw_image(void *param)
 		}
 	}
 }
-
-
-
-/*void	map_project(t_map *map, int i, int j)
-{
-	t_vertex	*previous;
-	t_vertex	temp;
-	t_pixel		*new;
-	
-	previous = &(map->original_points[i][j]);
-	new = &(map->projected_points[i][j]);
-	temp.x = previous->x;
-	temp.y = previous->y;
-	temp.z = previous->z * map->height_scale;
-	rot_z_axis(&temp.x, &temp.y, map->rotation_z);
-	new->x = (int)((temp.x * map->zoom - temp.y * map->zoom)
-		* cos(map->iso_angle_x) + map->center_x);
-	new->y = (int)(-temp.z * map->zoom
-			+ (temp.x * map->zoom + temp.y * map->zoom)
-			* sin(map->iso_angle_y) + map->center_y);
-	if (map->use_height_color)
-		new->rgba = previous->zcolor;
-		else
-			new->rgba = previous->mapcolor;
-}*/

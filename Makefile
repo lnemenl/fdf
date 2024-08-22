@@ -6,7 +6,7 @@
 #    By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 20:55:42 by rkhakimu          #+#    #+#              #
-#    Updated: 2024/08/22 20:55:45 by rkhakimu         ###   ########.fr        #
+#    Updated: 2024/08/22 23:32:38 by rkhakimu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ SRC		:= fdf_main.c \
 			fdf_menu.c \
 			fdf_minmax.c \
 			fdf_parse.c \
-			fdf_rotate.c \
 			fdf_utils.c \
-			fdf_color.c
+			fdf_color.c \
+			fdf_projection.c
 			
 SRCS	:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ_DIR	:= obj
