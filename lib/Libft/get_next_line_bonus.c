@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 08:35:05 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/07/04 16:54:35 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:58:05 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:58:07 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

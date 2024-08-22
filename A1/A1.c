@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   A1.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 09:37:44 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/19 16:35:35 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:59:56 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 21:07:02 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/Libft/libft.h"
 
-# define WIDTH			1920
-# define HEIGHT			1080
-# define TEXT_CLR		0xf3f6f4
-# define BACKGROUND		0x13333700
+# define WIDTH			3840
+# define HEIGHT			2160
+# define TEXT_CLR		0xf3f6f4FF
+# define BACKGROUND		0x0E2F4400
 # define MENU_BG_CLR	0x1E1E1EFF
-# define CLR_LV_1		0x00FFFFFF
-# define CLR_LV_2		0x099FFFFF
-# define CLR_LV_3		0x0062FFFF
-# define CLR_LV_4		0x0033FFFF
-# define CLR_LV_5		0x9D00FFFF
-# define CLR_LV_6		0xCC00FFFF
-# define CLR_LV_7		0x6E0DD0FF
-# define CLR_LV_8		0x9900FFFF
-# define CLR_LV_9		0xFF00FFFF
-# define CLR_LV_10		0xFF00CCFF
+# define CLR_LV_1		0xFF00CCFF
+# define CLR_LV_2		0xFF00FFFF
+# define CLR_LV_3		0x9900FFFF
+# define CLR_LV_4		0x6E0DD0F
+# define CLR_LV_5		0xCC00FFFF
+# define CLR_LV_6		0x9D00FFFF
+# define CLR_LV_7		0xF0033FFF
+# define CLR_LV_8		0x0062FFFF
+# define CLR_LV_9		0x099FFFFF
+# define CLR_LV_10		0x00FFFFFF
 
 # define USAGE_FORMAT	"Format:\n\t./fdf maps/filename.fdf"
 # define MALLOC_ERR		"Malloc failed"
@@ -77,7 +77,7 @@ typedef struct	s_map
 	double		rotation_y;
 	double		rotation_z;
 	double		zoom;
-	double		hight_scale;
+	double		height_scale;
 	t_vertex	**original_points;
 	t_pixel		**projected_points;
 }				t_map;
@@ -98,7 +98,7 @@ void	map_size(int fd, t_map *map);
 
 /* fdf_error.c */
 void	arr_free(void **ptr, size_t len);
-void	map_free(t_map *map);//free_map
+void	map_free(t_map *map);
 void	failSafe(const char *message);
 void	map_error(int fd, t_map *map, char *message);
 
@@ -129,6 +129,136 @@ int		ft_atoi_base(const char *str, const char *base);
 int		get_clr(t_pixel current, t_pixel start, t_pixel end);
 void	apply_zclr(t_map *map);
 
+#endif/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/22 20:59:56 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:59:58 by rkhakimu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FDF_H
+# define FDF_H
+
+# include <fcntl.h>
+# include <stdlib.h>
+# include <math.h>
+# include <errno.h>
+# include <stdio.h>
+# include <string.h>
+# include <limits.h>
+# include "../lib/MLX42/include/MLX42/MLX42.h"
+# include "../lib/Libft/libft.h"
+
+# define WIDTH			3840
+# define HEIGHT			2160
+# define TEXT_CLR		0xf3f6f4FF
+# define BACKGROUND		0x0E2F4400
+# define MENU_BG_CLR	0x1E1E1EFF
+# define CLR_LV_1		0xFF00CCFF
+# define CLR_LV_2		0xFF00FFFF
+# define CLR_LV_3		0x9900FFFF
+# define CLR_LV_4		0x6E0DD0F
+# define CLR_LV_5		0xCC00FFFF
+# define CLR_LV_6		0x9D00FFFF
+# define CLR_LV_7		0xF0033FFF
+# define CLR_LV_8		0x0062FFFF
+# define CLR_LV_9		0x099FFFFF
+# define CLR_LV_10		0x00FFFFFF
+
+# define USAGE_FORMAT	"Format:\n\t./fdf maps/filename.fdf"
+# define MALLOC_ERR		"Malloc failed"
+# define MAP_ERR		"Map is invalid"
+# define FILE_OPEN_ERR	"Unable to open file"
+
+typedef struct	s_vertex
+{
+	double  x;
+	double  y;
+	double  z;
+	int     mapcolor;
+	int     zcolor;
+}				t_vertex;
+
+typedef struct	s_pixel
+{
+	int     x;
+	int     y;
+	int     z;
+	int     rgba;
+}				t_pixel;
+
+typedef struct	s_map
+{
+	int			rows;
+	int			cols;
+	int			max_height;
+	int			min_height;
+	bool		use_height_color;
+	double		center_x;
+	double		center_y;
+	double		interval;
+	double		iso_angle_x;
+	double		iso_angle_y;
+	double		rotation_x;
+	double		rotation_y;
+	double		rotation_z;
+	double		zoom;
+	double		height_scale;
+	t_vertex	**original_points;
+	t_pixel		**projected_points;
+}				t_map;
+
+typedef struct s_fdf
+{
+	mlx_t       *mlx;
+	t_map       *map;
+	mlx_image_t *image;
+}               t_fdf;
+
+/* fdf_main.c */
+void	map_init(t_map *map);
+
+/* fdf_parse.c */
+void	map_parse(int fd, t_map *map);
+void	map_size(int fd, t_map *map);
+
+/* fdf_error.c */
+void	arr_free(void **ptr, size_t len);
+void	map_free(t_map *map);
+void	failSafe(const char *message);
+void	map_error(int fd, t_map *map, char *message);
+
+/* fdf_draw.c */
+void	map_project(t_map *map, int i, int j);
+void	draw_image(void *param);
+void	menu(mlx_t *mlx);
+
+/* fdf_rotate.c */
+void	rot_z_axis(double *x, double *y, double angle);
+
+/* fdf_hooks.c */
+void	hook_events(void *param);
+void	hook_scroll(double xscale, double yscale, void *param);
+void	hook_rotate(void *param);
+void	hook_project(void *param);
+
+/* fdf_utils.c*/
+void	to_upper(unsigned int i, char *c);
+void	image_reset(mlx_image_t *image);
+int		fname_valid(const char *filename);
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
+int		ft_atoi_base(const char *str, const char *base);
+
+
+/* fdf_color.c */
+int		get_clr(t_pixel current, t_pixel start, t_pixel end);
+void	apply_zclr(t_map *map);
 
 #endif
 
@@ -137,10 +267,10 @@ void	apply_zclr(t_map *map);
 /*                                                        :::      ::::::::   */
 /*   fdf_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 10:27:45 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:27:16 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:54:01 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:54:06 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,15 +354,16 @@ void	apply_zclr(t_map *map)
 		}
 	}
 }
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 07:23:45 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:40:58 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:54:19 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:54:23 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +408,7 @@ void	map_project(t_map *map, int i, int j)
 	new = &(map->projected_points[i][j]);
 	temp.x = previous->x;
 	temp.y = previous->y;
-	temp.z = previous->z * map->hight_scale;
+	temp.z = previous->z * map->height_scale;
 	rot_z_axis(&temp.x, &temp.y, map->rotation_z);
 	new->x = (int)((temp.x * map->zoom - temp.y * map->zoom)
 		* cos(map->iso_angle_x) + map->center_x);
@@ -327,15 +458,16 @@ void	draw_image(void *param)
 		}
 	}
 }
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 10:23:52 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/14 14:42:41 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:54:29 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:54:32 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,8 +522,8 @@ void    map_error(int fd, t_map *map, char *message)
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 14:11:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 18:14:38 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:54:42 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:54:47 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,7 +551,7 @@ static void	refresh_map(t_map *map)
 	map->center_x = WIDTH / 2;
 	map->center_y = HEIGHT / 2;
 	map->zoom = 1;
-	map->hight_scale = 1;
+	map->height_scale = 1;
 	map->use_height_color = false;
 }
 void	hook_events(void *param)
@@ -445,15 +577,54 @@ void	hook_events(void *param)
 		hook_scroll(0, -1, param);
 }
 
-void	hook_project(void *param)
-{
-	t_fdf	*fdf;
-	
-	fdf = (t_fdf *)param;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
-		fdf->map->use_height_color = !(fdf->map->use_height_color);
-}
 
+void hook_project(void *param)
+{
+    t_fdf *fdf;
+    static int key_pressed = 0;
+
+    fdf = (t_fdf *)param;
+    if (mlx_is_key_down(fdf->mlx, MLX_KEY_C))
+    {
+        if (!key_pressed)
+        {
+            fdf->map->use_height_color = !(fdf->map->use_height_color);
+            key_pressed = 1;
+        }
+    }
+    else
+    {
+        key_pressed = 0;
+    }
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1)) // Top view
+	{
+		fdf->map->iso_angle_x = 0;
+		fdf->map->iso_angle_y = M_PI / 2;
+		fdf->map->rotation_z = 0;
+		fdf->map->height_scale = 0; // Flatten the view for top-down perspective
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_2)) // Side view
+	{
+		fdf->map->iso_angle_x = 0;
+		fdf->map->iso_angle_y = 0;
+		fdf->map->rotation_z = M_PI / 2; // Rotate 90 degrees around Z-axis
+		fdf->map->height_scale = 1;
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_3)) // Front view
+	{
+		fdf->map->iso_angle_x = 0;
+		fdf->map->iso_angle_y = 0;
+		fdf->map->rotation_z = 0;
+		fdf->map->height_scale = 1;
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_4)) // Isometric view (original)
+	{
+		fdf->map->iso_angle_x = 0.46373398 / 2;
+		fdf->map->iso_angle_y = 0.46373398;
+		fdf->map->rotation_z = 0;
+		fdf->map->height_scale = 1;
+	}
+}
 void	hook_rotate(void *param)
 {
 	t_fdf	*fdf;
@@ -466,23 +637,20 @@ void	hook_rotate(void *param)
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_PERIOD))
 		sign = 1;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
-		fdf->map->hight_scale += sign * 0.02;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
-		fdf->map->iso_angle_x += sign * 0.02;
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
-		fdf->map->iso_angle_y += sign * 0.02;
+		fdf->map->height_scale += sign * 0.02;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Z))
 		fdf->map->rotation_z += sign * 0.02;
 }
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 10:00:26 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:28:55 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:54:53 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:54:55 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,7 +695,7 @@ void	map_init(t_map *map)
 	map->center_x = WIDTH / 2;
 	map->center_y = HEIGHT / 2;
 	map->zoom = 1;
-	map-> hight_scale = 1;
+	map-> height_scale = 1;
 	map->use_height_color = false;
 	map->max_height = INT_MIN;
 	map->min_height = INT_MAX;
@@ -542,7 +710,7 @@ static t_map	*input_parse(char *filename)
 	int		fd;
 	t_map	*map;
 	
-	fd = open(filename, O_RDONLY, 0777);
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		failSafe(FILE_OPEN_ERR);
 	map = malloc(sizeof(t_map));
@@ -555,9 +723,9 @@ static t_map	*input_parse(char *filename)
 	map_size(fd, map);
 	close(fd);
 	table_memalloc(map);
-	map->interval = ft_min(WIDTH / map->cols, HEIGHT / map->rows) / 2;
+	map->interval = ft_min(WIDTH / map->cols, HEIGHT / map->rows) / 4;
 	map->interval = ft_max(2, map->interval);
-	fd = open(filename, O_RDONLY, 0777);
+	fd = open(filename, O_RDONLY);
 	map_parse(fd, map);
 	close(fd);
 	apply_zclr(map);
@@ -610,15 +778,17 @@ int32_t	main(int ac, char **av)
 	map_free(fdf->map);
 	return (0);		
 }
+
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_menu.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 08:17:58 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 14:24:08 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:55:00 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:55:02 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -629,15 +799,19 @@ void	menu(mlx_t *mlx)
 	int		x;
 	int		y;
 	
-	x = 20;
-	y = 20;
+	x = 40;
+	y = 40;
 	mlx_put_string(mlx, "CONTROLS:", x, y);
-	mlx_put_string(mlx, "COLORS\t\t\t\t\t\t\t\tc", x, y += 35);
-	mlx_put_string(mlx, "ZOOM\t\t\t\t\t\t\t\t\t\tuse mouse scroll or +-", x, y += 20);
-	mlx_put_string(mlx, "MOVE\t\t\t\t\t\t\t\t\t\tarrows", x, y += 20);
-	mlx_put_string(mlx, "SCALE HIGHT\t\t\ts + </>", x, y += 20);
-	mlx_put_string(mlx, "ROTATE Z\t\t\t\t\t\tz + </>", x, y += 20);
-	mlx_put_string(mlx, "RESET\t\t\t\t\t\t\t\t\tr", x, y += 20);	
+	mlx_put_string(mlx, "COLORS\t\t\t\t\t\t\t\tc", x, y += 55);
+	mlx_put_string(mlx, "ZOOM\t\t\t\t\t\t\t\t\t\tuse mouse scroll or +-", x, y += 30);
+	mlx_put_string(mlx, "MOVE\t\t\t\t\t\t\t\t\t\tarrows", x, y += 30);
+	mlx_put_string(mlx, "SCALE HIGHT\t\t\ts + </>", x, y += 30);
+	mlx_put_string(mlx, "ROTATE Z\t\t\t\t\t\tz + </>", x, y += 30);
+	mlx_put_string(mlx, "RESET\t\t\t\t\t\t\t\t\tr", x, y += 30);
+	mlx_put_string(mlx, "TOP VIEW\t\t\t\t\t\t1", x, y += 30);
+	mlx_put_string(mlx, "FRONT VIEW\t\t\t\t2", x, y += 30);
+	mlx_put_string(mlx, "SIDE VIEW\t\t\t\t\t3", x, y += 30);
+	mlx_put_string(mlx, "ISO VIEW\t\t\t\t\t\t4", x, y += 30);
 }
 
 /* ************************************************************************** */
@@ -645,10 +819,10 @@ void	menu(mlx_t *mlx)
 /*                                                        :::      ::::::::   */
 /*   fdf_minmax.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 13:16:55 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:16:58 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:55:10 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:55:13 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -670,15 +844,16 @@ int	ft_max(int a, int b)
 		return (b);
 }
 
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 13:47:54 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 13:52:01 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:55:18 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:55:20 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -718,7 +893,7 @@ static void column_parse(int fd, t_map *map, char **arr, int i)
 		center_y = (map->rows - 1) * map->interval / 2;
 		point->x = (double)j * (map->interval) - center_x;
 		point->y = (double)i * (map->interval) - center_y;
-		point->z = (double)ft_atoi(arr[i]) * (map->interval);
+		point->z = (double)ft_atoi(arr[j]) * (map->interval);//changed from i to j, mindblowing
 		map->max_height = ft_max(map->max_height, point->z);
 		map->min_height = ft_min(map->min_height, point->z);
 		point->mapcolor = clr_parse(fd, map, arr[j]);
@@ -797,15 +972,17 @@ void	map_size(int fd, t_map *map)
 			map_error(fd, map, MAP_ERR);
 	}
 }
+
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 09:30:36 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 09:36:13 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:55:26 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:55:29 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -821,6 +998,8 @@ void	rot_z_axis(double *x, double *y, double angle)
 	*x = previous_x * cos(angle) - previous_y * sin(angle);
 	*y = previous_x * sin(angle) + previous_y * cos(angle);
 }
+
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -828,8 +1007,8 @@ void	rot_z_axis(double *x, double *y, double angle)
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 08:41:19 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/15 18:07:31 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:55:33 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:55:35 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -891,6 +1070,8 @@ int ft_atoi_base(const char *str, const char *base)
 	}
 	return (res * neg);
 }
+
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -898,8 +1079,8 @@ int ft_atoi_base(const char *str, const char *base)
 #                                                     +:+ +:+         +:+      #
 #    By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/08/14 09:35:13 by rkhakimu          #+#    #+#              #
-#    Updated: 2024/08/15 17:49:56 by rkhakimu         ###   ########.fr        #
+#    Created: 2024/08/22 20:55:42 by rkhakimu          #+#    #+#              #
+#    Updated: 2024/08/22 20:55:45 by rkhakimu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -969,12 +1150,15 @@ re: fclean all
 
 .PHONY: all, clean, fclean, re
 
+
+
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:42:47 by rkhakimu          #+#    #+#             */
 /*   Updated: 2024/07/23 09:57:31 by rkhakimu         ###   ########.fr       */
@@ -1302,7 +1486,7 @@ static int	isin_set(char c, char const *set)
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:34:38 by rkhakimu          #+#    #+#             */
 /*   Updated: 2024/07/29 11:37:52 by rkhakimu         ###   ########.fr       */
@@ -1391,15 +1575,3 @@ char	**ft_split(char const *s, char c)
 	array = split(s, c, array, words);
 	return (array);
 }
-
-
-//typedef void (*mlx_mousefunc)(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
-
-/**
- * Callback function used to handle raw mouse movement.
- * 
- * @param[in] xpos The mouse x position.
- * @param[in] ypos The mouse y position.
- * @param[in] param Additional parameter to pass on to the function.
- * */
-
