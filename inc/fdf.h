@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:59:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 20:59:58 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 23:33:12 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ void	map_project(t_map *map, int i, int j);
 void	draw_image(void *param);
 void	menu(mlx_t *mlx);
 
-/* fdf_rotate.c */
-void	rot_z_axis(double *x, double *y, double angle);
-
 /* fdf_hooks.c */
 void	hook_events(void *param);
 void	hook_scroll(double xscale, double yscale, void *param);
@@ -123,10 +120,13 @@ int		fname_valid(const char *filename);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		ft_atoi_base(const char *str, const char *base);
-
+void	refresh_map(t_map *map);
 
 /* fdf_color.c */
 int		get_clr(t_pixel current, t_pixel start, t_pixel end);
 void	apply_zclr(t_map *map);
+
+void	map_pov(t_map *map, t_pixel *new, double x, double y, double z);
+void	set_map_pov(t_map *map, t_vertex *previous, t_pixel *new, double x, double y, double z);
 
 #endif
