@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:00:26 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/21 17:55:13 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:14:28 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	table_memalloc(t_map *map)
 
 void	map_init(t_map *map)
 {
-	map->iso_angle_x = M_PI / 6;
-	map->iso_angle_y = M_PI / 6;
+	map->iso_angle_x = 0.46373398 / 2;
+	map->iso_angle_y = 0.46373398;
 	map->rotation_x = 0;
 	map->rotation_x = 0;
 	map->rotation_z = 0;

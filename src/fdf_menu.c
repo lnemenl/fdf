@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 08:17:58 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/16 08:14:55 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:04:04 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ void	menu(mlx_t *mlx)
 	mlx_put_string(mlx, "MOVE\t\t\t\t\t\t\t\t\t\tarrows", x, y += 30);
 	mlx_put_string(mlx, "SCALE HIGHT\t\t\ts + </>", x, y += 30);
 	mlx_put_string(mlx, "ROTATE Z\t\t\t\t\t\tz + </>", x, y += 30);
-	mlx_put_string(mlx, "RESET\t\t\t\t\t\t\t\t\tr", x, y += 30);	
+	mlx_put_string(mlx, "RESET\t\t\t\t\t\t\t\t\tr", x, y += 30);
+	mlx_put_string(mlx, "TOP VIEW\t\t\t\t\t\t1", x, y += 30);
+	mlx_put_string(mlx, "FRONT VIEW\t\t\t\t2", x, y += 30);
+	mlx_put_string(mlx, "SIDE VIEW\t\t\t\t\t3", x, y += 30);
+	mlx_put_string(mlx, "ISO VIEW\t\t\t\t\t\t4", x, y += 30);
 }
