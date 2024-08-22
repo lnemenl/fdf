@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+         #
+#    By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/30 12:45:23 by rkhakimu          #+#    #+#              #
-#    Updated: 2024/07/19 11:28:01 by rkhakimu         ###   ########.fr        #
+#    Created: 2024/08/22 20:58:46 by rkhakimu          #+#    #+#              #
+#    Updated: 2024/08/22 20:58:49 by rkhakimu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

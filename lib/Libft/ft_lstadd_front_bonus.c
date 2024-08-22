@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhakimu <rkhakimu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/27 15:56:57 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/07/04 19:43:00 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/22 20:56:28 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/22 20:56:30 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
