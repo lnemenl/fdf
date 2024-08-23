@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:55:18 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 20:55:20 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:27:49 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,40 @@ static int	clr_parse(int fd, t_map *map, char *arr2)
 		map_error(fd, map, MAP_ERR);
 	arr2 += 2;
 	ft_striteri(arr2, &to_upper);
-	return ((ft_atoi_base(arr2, "0123456789ABCDEF") << 8) | 0xFF);		
+	return ((ft_atoi_base(arr2, "0123456789ABCDEF") << 8) | 0xFF);
 }
 
-static void column_parse(int fd, t_map *map, char **arr, int i)
+static void	column_parse(int fd, t_map *map, char **arr, int i)
 {
 	t_vertex	*point;
 	int			center_x;
 	int			center_y;
 	int			j;
-	
+
 	j = -1;
 	while (++j < map->cols)
 	{
-		if(!ft_isdigit(*arr[j]) && *arr[j] != '-')
+		if (!ft_isdigit(*arr[j]) && *arr[j] != '-')
 			map_error(fd, map, MAP_ERR);
 		point = &(map->original_points[i][j]);
 		center_x = (map->cols - 1) * map->interval / 2;
 		center_y = (map->rows - 1) * map->interval / 2;
 		point->x = (double)j * (map->interval) - center_x;
 		point->y = (double)i * (map->interval) - center_y;
-		point->z = (double)ft_atoi(arr[j]) * (map->interval);//changed from i to j, mindblowing
+		point->z = (double)ft_atoi(arr[j]) * (map->interval);
 		map->max_height = ft_max(map->max_height, point->z);
 		map->min_height = ft_min(map->min_height, point->z);
 		point->mapcolor = clr_parse(fd, map, arr[j]);
 	}
 }
 
-void	map_parse(int fd, t_map * map)
+void	map_parse(int fd, t_map *map)
 {
 	char	**arr;
 	char	*line;
 	char	*temp;
 	int		i;
-	
+
 	i = -1;
 	while (++i < map->rows)
 	{
@@ -72,7 +72,7 @@ void	map_parse(int fd, t_map * map)
 			map_error(fd, map, MALLOC_ERR);
 		arr = ft_split(line, ' ');
 		free(line);
-		if(!arr)
+		if (!arr)
 			map_error(fd, map, MALLOC_ERR);
 		column_parse(fd, map, arr, i);
 		arr_free((void **)arr, map->cols);
@@ -84,14 +84,14 @@ static int	get_columns(int fd, t_map *map, char *line)
 	char	**arr;
 	char	*temp;
 	int		i;
-	
+
 	temp = ft_strtrim(line, "\n");
 	free(line);
-	if(!temp)
+	if (!temp)
 		map_error(fd, map, MALLOC_ERR);
 	arr = ft_split(temp, ' ');
 	free(temp);
-	if(!arr)
+	if (!arr)
 		map_error(fd, map, MALLOC_ERR);
 	i = 0;
 	while (arr[i])

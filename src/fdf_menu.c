@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:55:00 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 20:55:02 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:16:29 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	menu(mlx_t *mlx)
 {
 	int		x;
 	int		y;
-	
+
 	x = 40;
 	y = 40;
 	mlx_put_string(mlx, "CONTROLS:", x, y);
