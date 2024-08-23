@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:09:09 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/23 13:01:01 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:28:19 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	set_view_parameters(t_fdf *fdf, int view)
 void	hook_project(void *param)
 {
 	t_fdf		*fdf;
-	
+
 	fdf = (t_fdf *)param;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1))
 		set_view_parameters(fdf, 1);
@@ -105,13 +105,4 @@ void	hook_project(void *param)
 		set_view_parameters(fdf, 3);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_4))
 		set_view_parameters(fdf, 4);
-}
-
-void	change_color(mlx_key_data_t keydata, void *param)
-{
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *)param;
-	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
-		fdf->map->use_height_color = !fdf->map->use_height_color;
 }

@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:10:06 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/23 13:01:39 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:29:01 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ typedef struct s_pixel
 	int	z;
 	int	rgba;
 }				t_pixel;
+
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+	double	z;
+}				t_coord;
 
 typedef struct s_map
 {
@@ -126,9 +133,10 @@ void	refresh_map(t_map *map);
 int		get_clr(t_pixel current, t_pixel start, t_pixel end);
 void	apply_zclr(t_map *map);
 
-void	map_pov(t_map *map, t_pixel *new, double x, double y, double z);
+void	map_pov(t_map *map, t_pixel *new, t_coord coord);
 void	set_map_pov(t_map *map, t_vertex *previous,
-			t_pixel *new, double x, double y, double z);
+			t_pixel *new, t_coord coord);
 void	change_color(mlx_key_data_t keydata, void *param);
+void	rot_z_axis(double *x, double *y, double angle);
 
 #endif
