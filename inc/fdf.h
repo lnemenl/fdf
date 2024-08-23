@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:10:06 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/23 11:10:09 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:01:39 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,6 @@ void	apply_zclr(t_map *map);
 void	map_pov(t_map *map, t_pixel *new, double x, double y, double z);
 void	set_map_pov(t_map *map, t_vertex *previous,
 			t_pixel *new, double x, double y, double z);
+void	change_color(mlx_key_data_t keydata, void *param);
 
 #endif
