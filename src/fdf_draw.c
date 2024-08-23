@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:09:39 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/23 11:09:41 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:27:12 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,15 @@ void	map_project(t_map *map, int i, int j)
 {
 	t_vertex	*previous;
 	t_pixel		*new;
-	double		x;
-	double		y;
-	double		z;
-	double		temp_x;
-	double		temp_y;
+	t_coord		coord;
 
 	previous = &(map->original_points[i][j]);
 	new = &(map->projected_points[i][j]);
-	x = previous->x;
-	y = previous->y;
-	z = previous->z * map->height_scale;
-	temp_x = x * cos(map->rotation_z) - y * sin(map->rotation_z);
-	temp_y = x * sin(map->rotation_z) + y * cos(map->rotation_z);
-	x = temp_x;
-	y = temp_y;
-	set_map_pov(map, previous, new, x, y, z);
+	coord.x = previous->x;
+	coord.y = previous->y;
+	coord.z = previous->z * map->height_scale;
+	rot_z_axis(&coord.x, &coord.y, map->rotation_z);
+	set_map_pov(map, previous, new, coord);
 }
 
 static void	draw_line(t_fdf *fdf, int x, int y)
