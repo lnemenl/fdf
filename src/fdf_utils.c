@@ -6,16 +6,16 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:55:33 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 22:56:43 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:33:12 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-int 	fname_valid(const char *filename)
+int	fname_valid(const char *filename)
 {
-	int		len;
-	
+	int	len;
+
 	len = ft_strlen(filename);
 	if (len < 5)
 		return (0);
@@ -38,7 +38,7 @@ void	image_reset(mlx_image_t *image)
 	while (i < image->height)
 	{
 		j = 0;
-		while ( j < image->width)
+		while (j < image->width)
 		{
 			mlx_put_pixel(image, j, i, BACKGROUND);
 			j++;
@@ -46,6 +46,7 @@ void	image_reset(mlx_image_t *image)
 		i++;
 	}
 }
+
 void	refresh_map(t_map *map)
 {
 	map->iso_angle_x = 0.46373398 / 2;
@@ -60,14 +61,14 @@ void	refresh_map(t_map *map)
 	map->use_height_color = false;
 }
 
-int ft_atoi_base(const char *str, const char *base)
+int	ft_atoi_base(const char *str, const char *base)
 {
-	int		neg;
-	int		res;
-	int		nbase;
+	int	neg;
+	int	res;
+	int	nbase;
 
 	while (*str == ' ' || *str == '\t' || *str == '\n'
-			|| *str == '\v' || *str == '\f' || *str == '\r')
+		|| *str == '\v' || *str == '\f' || *str == '\r')
 		str++;
 	neg = 1;
 	if (*str == '-' || *str == '+')

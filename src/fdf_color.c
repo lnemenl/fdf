@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 20:54:01 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 23:06:20 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/23 11:09:29 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/23 11:33:36 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static double	percent(int start, int end, int current)
 	return (position / distance);
 }
 
-int 	get_clr(t_pixel current, t_pixel start, t_pixel end)
+int	get_clr(t_pixel current, t_pixel start, t_pixel end)
 {
-	int 	r;
-	int 	g;
-	int 	b;
+	int		r;
+	int		g;
+	int		b;
 	double	prcntg;
 
 	if (start.rgba == end.rgba)
 		return (start.rgba);
-	if (abs(end.x -start.x) > abs(end.y - start.y))
+	if (abs(end.x - start.x) > abs(end.y - start.y))
 		prcntg = percent(start.x, end.x, current.x);
 	else
 		prcntg = percent(start.y, end.y, current.y);
@@ -77,7 +77,7 @@ void	apply_zclr(t_map *map)
 	int		i;
 	int		j;
 	double	prcnt;
-	
+
 	i = -1;
 	while (++i < map->rows)
 	{
@@ -85,7 +85,7 @@ void	apply_zclr(t_map *map)
 		while (++j < map->cols)
 		{
 			prcnt = percent(map->min_height, map->max_height,
-				map->original_points[i][j].z);
+					map->original_points[i][j].z);
 			map->original_points[i][j].zcolor = zclr(prcnt);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:54:53 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 20:54:55 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:34:26 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	table_memalloc(t_map *map)
 {
-	int i;
-	
+	int	i;
+
 	map->original_points = malloc(sizeof(t_vertex *) * map->rows);
 	map->projected_points = malloc(sizeof(t_pixel *) * map->rows);
 	if (!(map->projected_points) ||!(map->original_points))
 	{
 		map_free(map);
-		failSafe(MALLOC_ERR);
+		fail_safe(MALLOC_ERR);
 	}
 	i = -1;
 	while (++i < map->rows)
@@ -33,10 +33,10 @@ static void	table_memalloc(t_map *map)
 			if (i + 1 < map->rows)
 			{
 				map->original_points[i + 1] = NULL;
-				map->projected_points[i + 1] =  NULL;
+				map->projected_points[i + 1] = NULL;
 			}
 			map_free(map);
-			failSafe(MALLOC_ERR);
+			fail_safe(MALLOC_ERR);
 		}
 	}
 }
@@ -51,7 +51,7 @@ void	map_init(t_map *map)
 	map->center_x = WIDTH / 2;
 	map->center_y = HEIGHT / 2;
 	map->zoom = 1;
-	map-> height_scale = 1;
+	map->height_scale = 1;
 	map->use_height_color = false;
 	map->max_height = INT_MIN;
 	map->min_height = INT_MAX;
@@ -65,15 +65,15 @@ static t_map	*input_parse(char *filename)
 {
 	int		fd;
 	t_map	*map;
-	
+
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		failSafe(FILE_OPEN_ERR);
+		fail_safe(FILE_OPEN_ERR);
 	map = malloc(sizeof(t_map));
 	if (!map)
 	{
 		close(fd);
-		failSafe(MALLOC_ERR);
+		fail_safe(MALLOC_ERR);
 	}
 	map_init(map);
 	map_size(fd, map);
@@ -85,26 +85,26 @@ static t_map	*input_parse(char *filename)
 	map_parse(fd, map);
 	close(fd);
 	apply_zclr(map);
-	return(map);
+	return (map);
 }
 
 static t_fdf	*fdf_init(char *filename)
 {
 	static t_fdf	fdf;
-	
+
 	fdf.map = input_parse(filename);
 	fdf.mlx = mlx_init(WIDTH, HEIGHT, "fdf", true);
 	if (!fdf.mlx)
 	{
 		map_free(fdf.map);
-		failSafe(mlx_strerror(mlx_errno));
+		fail_safe(mlx_strerror(mlx_errno));
 	}
 	fdf.image = mlx_new_image(fdf.mlx, WIDTH, HEIGHT);
 	if (!fdf.image)
 	{
 		map_free(fdf.map);
 		mlx_close_window(fdf.mlx);
-		failSafe(mlx_strerror(mlx_errno));
+		fail_safe(mlx_strerror(mlx_errno));
 	}
 	return (&fdf);
 }
@@ -112,9 +112,9 @@ static t_fdf	*fdf_init(char *filename)
 int32_t	main(int ac, char **av)
 {
 	t_fdf	*fdf;
-	
+
 	if (ac != 2 || !fname_valid(av[1]))
-		failSafe(USAGE_FORMAT);
+		fail_safe(USAGE_FORMAT);
 	fdf = fdf_init(av[1]);
 	menu(fdf->mlx);
 	draw_image(fdf);
@@ -122,7 +122,7 @@ int32_t	main(int ac, char **av)
 	{
 		map_free(fdf->map);
 		mlx_close_window(fdf->mlx);
-		failSafe(mlx_strerror(mlx_errno));
+		fail_safe(mlx_strerror(mlx_errno));
 	}
 	mlx_loop_hook(fdf->mlx, &hook_events, fdf);
 	mlx_loop_hook(fdf->mlx, &hook_rotate, fdf);
@@ -132,5 +132,5 @@ int32_t	main(int ac, char **av)
 	mlx_loop(fdf->mlx);
 	mlx_terminate(fdf->mlx);
 	map_free(fdf->map);
-	return (0);		
+	return (0);
 }

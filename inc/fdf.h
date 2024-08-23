@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 20:59:56 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/22 23:33:12 by rkhakimu         ###   ########.fr       */
+/*   Created: 2024/08/23 11:10:06 by rkhakimu          #+#    #+#             */
+/*   Updated: 2024/08/23 11:10:09 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,24 @@
 # define MAP_ERR		"Map is invalid"
 # define FILE_OPEN_ERR	"Unable to open file"
 
-typedef struct	s_vertex
+typedef struct s_vertex
 {
-	double  x;
-	double  y;
-	double  z;
-	int     mapcolor;
-	int     zcolor;
+	double	x;
+	double	y;
+	double	z;
+	int		mapcolor;
+	int		zcolor;
 }				t_vertex;
 
-typedef struct	s_pixel
+typedef struct s_pixel
 {
-	int     x;
-	int     y;
-	int     z;
-	int     rgba;
+	int	x;
+	int	y;
+	int	z;
+	int	rgba;
 }				t_pixel;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int			rows;
 	int			cols;
@@ -84,10 +84,10 @@ typedef struct	s_map
 
 typedef struct s_fdf
 {
-	mlx_t       *mlx;
-	t_map       *map;
-	mlx_image_t *image;
-}               t_fdf;
+	mlx_t		*mlx;
+	t_map		*map;
+	mlx_image_t	*image;
+}				t_fdf;
 
 /* fdf_main.c */
 void	map_init(t_map *map);
@@ -99,7 +99,7 @@ void	map_size(int fd, t_map *map);
 /* fdf_error.c */
 void	arr_free(void **ptr, size_t len);
 void	map_free(t_map *map);
-void	failSafe(const char *message);
+void	fail_safe(const char *message);
 void	map_error(int fd, t_map *map, char *message);
 
 /* fdf_draw.c */
@@ -127,6 +127,7 @@ int		get_clr(t_pixel current, t_pixel start, t_pixel end);
 void	apply_zclr(t_map *map);
 
 void	map_pov(t_map *map, t_pixel *new, double x, double y, double z);
-void	set_map_pov(t_map *map, t_vertex *previous, t_pixel *new, double x, double y, double z);
+void	set_map_pov(t_map *map, t_vertex *previous,
+			t_pixel *new, double x, double y, double z);
 
 #endif
