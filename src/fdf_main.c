@@ -6,7 +6,7 @@
 /*   By: rkhakimu <rkhakimu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:54:53 by rkhakimu          #+#    #+#             */
-/*   Updated: 2024/08/23 11:34:26 by rkhakimu         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:05:35 by rkhakimu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int32_t	main(int ac, char **av)
 		mlx_close_window(fdf->mlx);
 		fail_safe(mlx_strerror(mlx_errno));
 	}
+	mlx_key_hook(fdf->mlx, &change_color, fdf);
 	mlx_loop_hook(fdf->mlx, &hook_events, fdf);
 	mlx_loop_hook(fdf->mlx, &hook_rotate, fdf);
 	mlx_loop_hook(fdf->mlx, &hook_project, fdf);
